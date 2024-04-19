@@ -562,6 +562,7 @@ class FilamentCompaniesServiceProvider extends PanelProvider
                 FilamentCompanies::make()
                     ->socialite(
                         providers: [
+                            Provider::Discord, // requires socialiteproviders/discord composer package
                             Provider::Github,
                             Provider::Gitlab,
                             Provider::Google,

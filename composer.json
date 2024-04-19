@@ -43,6 +43,9 @@
         "orchestra/testbench": "^9.0",
         "phpunit/phpunit": "^10.5"
     },
+    "suggest": {
+        "socialiteproviders/discord": "To use the discord socialite provider"
+    },
     "autoload": {
         "psr-4": {
             "Wallo\\FilamentCompanies\\": "src/"

@@ -2,8 +2,10 @@
 
 namespace Wallo\FilamentCompanies;
 
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
+use SocialiteProviders\Manager\SocialiteWasCalled;
 use Wallo\FilamentCompanies\Http\Livewire\CompanyEmployeeManager;
 use Wallo\FilamentCompanies\Http\Livewire\ConnectedAccountsForm;
 use Wallo\FilamentCompanies\Http\Livewire\DeleteCompanyForm;
@@ -35,6 +37,8 @@ class FilamentCompaniesServiceProvider extends ServiceProvider
 
         $this->configurePublishing();
         $this->configureCommands();
+
+        $this->configureSocialiteProviders();
 
         $this->app->booted(function () {
             $this->configureComponents();
@@ -109,5 +113,17 @@ class FilamentCompaniesServiceProvider extends ServiceProvider
         $this->commands([
             Console\InstallCommand::class,
         ]);
+    }
+
+    /**
+     * Configure the additional socialite providers.
+     */
+    protected function configureSocialiteProviders(): void
+    {
+        Event::listen(function (SocialiteWasCalled $event) {
+            if (class_exists(\SocialiteProviders\Discord\Provider::class)) {
+                $event->extendSocialite('discord', \SocialiteProviders\Discord\Provider::class);
+            }
+        });
     }
 }

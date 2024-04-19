@@ -9,6 +9,7 @@ use Wallo\FilamentCompanies\FilamentCompanies;
 enum Provider: string implements HasLabel
 {
     case Bitbucket = 'bitbucket';
+    case Discord = 'discord';
     case Facebook = 'facebook';
     case Gitlab = 'gitlab';
     case Github = 'github';
@@ -23,6 +24,7 @@ enum Provider: string implements HasLabel
     {
         return match ($this) {
             self::Bitbucket => 'Bitbucket',
+            self::Discord => 'Discord',
             self::Facebook => 'Facebook',
             self::Gitlab => 'GitLab',
             self::Github => 'GitHub',
@@ -42,6 +44,7 @@ enum Provider: string implements HasLabel
     {
         $viewName = match ($this) {
             self::Bitbucket => 'filament-companies::components.socialite-icons.bitbucket',
+            self::Discord => 'filament-companies::components.socialite-icons.discord',
             self::Facebook => 'filament-companies::components.socialite-icons.facebook',
             self::Gitlab => 'filament-companies::components.socialite-icons.gitlab',
             self::Github => 'filament-companies::components.socialite-icons.github',
